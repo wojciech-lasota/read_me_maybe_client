@@ -1,0 +1,34 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Title
+        <button class="btn btn-link btn-sm" (click)="toggleTitleSortDirection(); sortBooks('BookTitle')">Sort {{
+          getTitleSortIcon() }}</button>
+      </th>
+      <th>
+        Author
+        <button class="btn btn-link btn-sm" (click)="toggleSortDirection(); sortBooks('Author')">Sort {{
+          getAuthorSortIcon() }}</button>
+      </th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books">
+      <td class="m-1">{{ book.BookTitle }}</td>
+      <td class="m-1">{{ book.Author }}</td>
+      <td>
+        <button class="btn btn-warning btn-sm m-1" (click)="onUpdate(book.BookID)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn btn-danger btn-sm m-1" (click)="onDelete(book.BookID)">
+          <i class="fas fa-trash"></i>
+        </button>
+        <button class="btn btn-secondary btn-sm" (click)="onPreview(book.BookID)">
+          <i class="fas fa-list"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

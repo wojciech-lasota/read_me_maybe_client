@@ -1,0 +1,17 @@
+<h2>Category List</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Category Name
+        <button class="btn btn-link btn-sm" (click)="toggleSortDirection(); sortCategories('CategoryName')">Sort {{
+          getSortIcon() }}</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <td class="m-2">{{ category.CategoryName }}</td>
+    </tr>
+  </tbody>
+</table>

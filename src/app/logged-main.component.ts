@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-logged-main',
-  templateUrl: './logged-main.component.html',
-  styleUrls: ['./logged-main.component.scss']
+  template: ` <router-outlet></router-outlet>`,
+  styleUrls: ['./logged-main.component.scss'],
 })
-export class LoggedMainComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class LoggedMainComponent {}
