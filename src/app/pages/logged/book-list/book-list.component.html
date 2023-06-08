@@ -1,3 +1,11 @@
+<div class="d-flex justify-content-start mt-3">
+  <button routerLink="/book-list/add" class="btn btn-primary">
+    <i class="fas fa-plus-circle"></i> Add Books
+  </button>
+  <button *ngIf="isAddBookRoute" routerLink="/book-list" class="btn btn-primary">
+    <i class="fa-solid fa-circle-xmark"></i> Close
+  </button>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -6,29 +14,33 @@
         <button class="btn btn-link btn-sm" (click)="toggleTitleSortDirection(); sortBooks('BookTitle')">Sort {{
           getTitleSortIcon() }}</button>
       </th>
-      <th>
-        Author
-        <button class="btn btn-link btn-sm" (click)="toggleSortDirection(); sortBooks('Author')">Sort {{
-          getAuthorSortIcon() }}</button>
-      </th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let book of books">
       <td class="m-1">{{ book.BookTitle }}</td>
-      <td class="m-1">{{ book.Author }}</td>
       <td>
-        <button class="btn btn-warning btn-sm m-1" (click)="onUpdate(book.BookID)">
+        <button class="btn btn-warning btn-sm m-1" title="" (click)="onUpdate(book.BookID)">
           <i class="fas fa-edit"></i>
         </button>
         <button class="btn btn-danger btn-sm m-1" (click)="onDelete(book.BookID)">
           <i class="fas fa-trash"></i>
         </button>
         <button class="btn btn-secondary btn-sm" (click)="onPreview(book.BookID)">
-          <i class="fas fa-list"></i>
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </td>
     </tr>
   </tbody>
 </table>
+<div class="d-flex justify-content-start mt-3">
+  <button routerLink="/book-list/add" class="btn btn-primary">
+    <i class="fas fa-plus-circle"></i> Add Books
+  </button>
+  <button *ngIf="isAddBookRoute" routerLink="/book-list" class="btn btn-primary">
+    <i class="fa-solid fa-circle-xmark"></i> Close
+  </button>
+
+</div>
+<router-outlet></router-outlet>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { BookUpdateService } from 'src/app/shared/services/book-update.service';
 import { Book, BookService } from 'src/app/shared/services/book.service';
 
 @Component({
@@ -12,10 +14,20 @@ export class BookListComponent implements OnInit {
   sortDirectionAsc: boolean = true;
   titleSortDirectionAsc: boolean = true;
 
-  constructor(private readonly bookService: BookService) {}
+  constructor(
+    private readonly bookService: BookService,
+    private router: Router,
+    private bookUpdateService: BookUpdateService
+  ) {}
 
   ngOnInit(): void {
     this.getBooks();
+    this.bookUpdateService.refreshNeeded$.subscribe(() => {
+      this.getBooks();
+    });
+  }
+  get isAddBookRoute() {
+    return this.router.url.includes('/book-list/add');
   }
 
   getBooks(): void {
@@ -57,18 +69,18 @@ export class BookListComponent implements OnInit {
     return this.titleSortDirectionAsc ? '▲' : '▼';
   }
 
-  getAuthorSortIcon(): string {
-    return this.sortDirectionAsc ? '▲' : '▼';
-  }
   onUpdate(bookId: number): void {
-    // logika aktualizacji...
+    this.router.navigate(['/book-list/add', bookId]);
   }
 
   onDelete(bookId: number): void {
-    // logika usuwania...
+    this.bookService.deleteBook(bookId).subscribe(() => {
+      this.getBooks();
+    });
   }
 
   onPreview(bookId: number): void {
-    // logika podglądu...
+    console.log('bookId', bookId);
+    this.router.navigate(['/preview', bookId]);
   }
 }

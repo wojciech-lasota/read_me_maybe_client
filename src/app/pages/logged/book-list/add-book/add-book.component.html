@@ -1,0 +1,48 @@
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label for="BookTitle">Book Title</label>
+    <input id="BookTitle" type="text" class="form-control" formControlName="BookTitle" required>
+    <div
+      *ngIf="bookForm.get('BookTitle')?.invalid && (bookForm.get('BookTitle')?.dirty || bookForm.get('BookTitle')?.touched)"
+      class="alert alert-danger">
+      Book title is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="Author">Author</label>
+    <input id="Author" type="text" class="form-control" formControlName="Author" required>
+    <div *ngIf="bookForm.get('Author')?.invalid && (bookForm.get('Author')?.dirty || bookForm.get('Author')?.touched)"
+      class="alert alert-danger">
+      Author is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="ISBN">ISBN</label>
+    <input id="ISBN" type="text" class="form-control" formControlName="ISBN" required>
+    <div *ngIf="bookForm.get('ISBN')?.invalid && (bookForm.get('ISBN')?.dirty || bookForm.get('ISBN')?.touched)"
+      class="alert alert-danger">
+      ISBN is required and should be 13 characters long.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="CategoryID">Category</label>
+    <select id="CategoryID" class="form-control custom-select" formControlName="CategoryID" required>
+      <option *ngFor="let category of categories" [value]="category.CategoryID">{{category.CategoryName}}</option>
+    </select>
+    <div
+      *ngIf="bookForm.get('CategoryID')?.invalid && (bookForm.get('CategoryID')?.dirty || bookForm.get('CategoryID')?.touched)"
+      class="alert alert-danger">
+      Category is required.
+    </div>
+  </div>
+  <button routerLink="/book-list" class="btn btn-primary">
+    <i class="fa-solid fa-backward"></i> Back
+  </button>
+  <button type="submit" class="btn btn-primary" [disabled]="!bookForm.valid">Add Book</button>
+
+
+</form>

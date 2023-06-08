@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { CategoryComponent } from './category/category.component';
+import { AddBookComponent } from './book-list/add-book/add-book.component';
+import { PrewievComponent } from './prewiev/prewiev.component';
 
 const routes: Routes = [
   {
@@ -12,6 +14,20 @@ const routes: Routes = [
       {
         path: 'book-list',
         component: BookListComponent,
+        children: [
+          {
+            path: 'add',
+            component: AddBookComponent,
+          },
+          {
+            path: 'add/:id',
+            component: AddBookComponent,
+          },
+        ],
+      },
+      {
+        path: 'preview/:id',
+        component: PrewievComponent,
       },
       {
         path: 'category',

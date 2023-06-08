@@ -8,13 +8,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/book-list">Book list</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/book-list">Book list</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/category">Book category</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/category">Book category</a>
         </li>
         <li class="nav-item">
-          <button class="nav-link btn btn-light" (click)="logout()">Logout</button>
+          <button class="nav-link btn btn-light" routerLinkActive="active" (click)="logout()">Logout</button>
         </li>
       </ul>
     </div>
