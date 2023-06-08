@@ -23,6 +23,9 @@ export class CategoryService {
   getCategoryList() {
     return this.http.get<Category[]>(`${this.apiUrl}`);
   }
+  getCategoryWithBooks() {
+    return this.http.get<Category[]>(`${this.apiUrl}/with-books`);
+  }
 
   // Tworzy nową kategorię
   createCategory(category: { CategoryName: string }) {

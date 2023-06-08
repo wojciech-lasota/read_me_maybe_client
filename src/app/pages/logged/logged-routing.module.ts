@@ -4,14 +4,20 @@ import { MainComponent } from './main.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { CategoryComponent } from './category/category.component';
 import { AddBookComponent } from './book-list/add-book/add-book.component';
-import { PreviewComponent } from './prewiev/prewiev.component';
+import { PreviewComponent } from './preview/prewiev.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { HomeComponent } from './home/home.component';
+import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
     children: [
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
       {
         path: 'book-list',
         component: BookListComponent,
@@ -43,6 +49,10 @@ const routes: Routes = [
             component: AddCategoryComponent,
           },
         ],
+      },
+      {
+        path: 'list',
+        component: ListComponent,
       },
     ],
   },

@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
         tap((response) => {
           console.log('response', response);
           this.tokenService.setToken(response.accessToken);
-          this.router.navigate(['']);
+          this.router.navigate(['book-list']);
         }),
         catchError((error) => {
           this.error = 'Login failed. Please check your credentials.';

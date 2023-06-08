@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+.navbar {
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.jumbotron {
+  background-color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+}

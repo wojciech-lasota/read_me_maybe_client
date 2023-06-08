@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main',
-  template: ` <router-outlet></router-outlet>`,
+  templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent {}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, tap } from 'rxjs';
 import { BookUpdateService } from 'src/app/shared/services/book-update.service';
 import { BookService } from 'src/app/shared/services/book.service';
 import {
@@ -52,6 +52,10 @@ export class AddBookComponent implements OnInit {
     this.categoryService.getCategoryList().subscribe((categories) => {
       this.categories = categories;
     });
+    // this.categoryService
+    //   .getCategoryWithBooks()
+    //   .pipe(tap((category) => console.log('category', category)))
+    //   .subscribe();
   }
   isUpdating(): boolean {
     return this.route.snapshot.paramMap.has('id');
