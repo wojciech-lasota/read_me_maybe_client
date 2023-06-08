@@ -7,7 +7,8 @@ import { BookListComponent } from './book-list/book-list.component';
 import { CategoryComponent } from './category/category.component';
 import { AddBookComponent } from './book-list/add-book/add-book.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PrewievComponent } from './prewiev/prewiev.component';
+import { PreviewComponent } from './prewiev/prewiev.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PrewievComponent } from './prewiev/prewiev.component';
     BookListComponent,
     CategoryComponent,
     AddBookComponent,
-    PrewievComponent,
+    PreviewComponent,
+    AddCategoryComponent,
   ],
   imports: [CommonModule, LoggedRoutingModule, ReactiveFormsModule],
 })

@@ -4,7 +4,8 @@ import { MainComponent } from './main.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { CategoryComponent } from './category/category.component';
 import { AddBookComponent } from './book-list/add-book/add-book.component';
-import { PrewievComponent } from './prewiev/prewiev.component';
+import { PreviewComponent } from './prewiev/prewiev.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
 
 const routes: Routes = [
   {
@@ -27,11 +28,21 @@ const routes: Routes = [
       },
       {
         path: 'preview/:id',
-        component: PrewievComponent,
+        component: PreviewComponent,
       },
       {
         path: 'category',
         component: CategoryComponent,
+        children: [
+          {
+            path: 'add',
+            component: AddCategoryComponent,
+          },
+          {
+            path: 'add/:id',
+            component: AddCategoryComponent,
+          },
+        ],
       },
     ],
   },

@@ -19,14 +19,6 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="ISBN">ISBN</label>
-    <input id="ISBN" type="text" class="form-control" formControlName="ISBN" required>
-    <div *ngIf="bookForm.get('ISBN')?.invalid && (bookForm.get('ISBN')?.dirty || bookForm.get('ISBN')?.touched)"
-      class="alert alert-danger">
-      ISBN is required and should be 13 characters long.
-    </div>
-  </div>
 
   <div class="form-group">
     <label for="CategoryID">Category</label>
@@ -39,10 +31,15 @@
       Category is required.
     </div>
   </div>
-  <button routerLink="/book-list" class="btn btn-primary">
-    <i class="fa-solid fa-backward"></i> Back
+  <!-- Wyświetl przycisk "Add Book", jeśli nie ma parametru 'id' -->
+  <button *ngIf="!isUpdating()" type="submit" class="btn btn-primary" [disabled]="!bookForm.valid">
+    Add Book
   </button>
-  <button type="submit" class="btn btn-primary" [disabled]="!bookForm.valid">Add Book</button>
+
+  <!-- Wyświetl przycisk "Update Book", jeśli parametr 'id' istnieje -->
+  <button *ngIf="isUpdating()" type="submit" class="btn btn-primary" [disabled]="!bookForm.valid">
+    Update Book
+  </button>
 
 
 </form>

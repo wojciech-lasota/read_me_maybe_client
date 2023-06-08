@@ -63,12 +63,12 @@ export class LoginComponent implements OnInit {
         catchError((error) => {
           this.error = 'Login failed. Please check your credentials.';
           console.error('error', error);
+          this.loading = false;
+
           return error;
         })
       )
-      .subscribe(null, null, () => {
-        this.loading = false;
-      });
+      .subscribe(() => {});
   }
 
   usernameValidator(control: AbstractControl): { [key: string]: any } | null {
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
 
   passwordValidator(control: AbstractControl): { [key: string]: any } | null {
     const value = control.value;
-    const valid = /^(?=.*[A-Za-z])(?=.*\d{3,}).{6,}$/.test(value);
+    const valid = /^(?=.*[A-Za-z])(?=.*\d{1,}).{6,}$/.test(value);
     return valid ? null : { invalidPassword: true };
   }
 }

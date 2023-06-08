@@ -32,7 +32,7 @@ export class BookListComponent implements OnInit {
 
   getBooks(): void {
     this.bookService
-      .getBasicBooks()
+      .getBooks()
       .pipe(
         tap((books) => {
           console.log('books', books);

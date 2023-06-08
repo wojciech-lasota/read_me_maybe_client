@@ -29,14 +29,6 @@ export class AddBookComponent implements OnInit {
     this.bookForm = this.fb.group({
       BookTitle: ['', Validators.required],
       Author: ['', Validators.required],
-      ISBN: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(13),
-          Validators.maxLength(13),
-        ],
-      ],
       CategoryID: ['', Validators.required],
     });
   }
@@ -50,7 +42,6 @@ export class AddBookComponent implements OnInit {
           this.bookForm.patchValue({
             BookTitle: book.BookTitle,
             Author: book.Author,
-            ISBN: book.ISBN,
             CategoryID: book.CategoryID,
           });
         });
@@ -62,7 +53,9 @@ export class AddBookComponent implements OnInit {
       this.categories = categories;
     });
   }
-
+  isUpdating(): boolean {
+    return this.route.snapshot.paramMap.has('id');
+  }
   onSubmit() {
     const bookId = this.route.snapshot.paramMap.get('id');
     if (this.bookForm.valid) {
@@ -70,8 +63,9 @@ export class AddBookComponent implements OnInit {
       if (bookId) {
         const bookToUpdate = { ...this.bookForm.value, BookID: +bookId };
         console.log('bookToUpdate', bookToUpdate);
-        bookObs$ = this.bookService.upDateBook(bookToUpdate);
+        bookObs$ = this.bookService.updateBook(bookToUpdate);
       } else {
+        console.log('this.bookForm.value', this.bookForm.value);
         bookObs$ = this.bookService.addBook(this.bookForm.value);
       }
 

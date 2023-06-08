@@ -8,7 +8,7 @@ import { Book, BookService } from 'src/app/shared/services/book.service';
   templateUrl: './prewiev.component.html',
   styleUrls: ['./prewiev.component.scss'],
 })
-export class PrewievComponent implements OnInit {
+export class PreviewComponent implements OnInit {
   book!: Book;
 
   constructor(
@@ -19,9 +19,10 @@ export class PrewievComponent implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.bookService
-      .getBook(id)
+      .getBookDetails(id)
       .pipe(
         tap((book) => {
+          console.log('book', book);
           this.book = book;
         })
       )

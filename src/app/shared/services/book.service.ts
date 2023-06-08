@@ -9,6 +9,7 @@ export interface Book {
   Author: string;
   ISBN: string;
   CategoryID: number;
+  CategoryName: number;
   [key: string]: number | string;
 }
 
@@ -19,26 +20,30 @@ export class BookService {
   constructor(private http: HttpClient) {}
 
   getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${environment.baseUrl}/book-list`);
+    return this.http.get<Book[]>(`${environment.baseUrl}/books`);
   }
 
   getBook(id: number): Observable<Book> {
-    return this.http.get<Book>(`${environment.baseUrl}/book-list/${id}`);
+    return this.http.get<Book>(`${environment.baseUrl}/books/${id}`);
+  }
+  getBookDetails(id: number): Observable<Book> {
+    return this.http.get<Book>(`${environment.baseUrl}/books/${id}/details`);
   }
 
-  getBasicBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${environment.baseUrl}/book-list/basic`);
-  }
+  // getBasicBooks(): Observable<Book[]> {
+  //   return this.http.get<Book[]>(`${environment.baseUrl}/book-list/basic`);
+  // }
   addBook(book: Book): Observable<Book> {
-    return this.http.post<Book>(`${environment.baseUrl}/book-list`, book);
+    console.log('book', book);
+    return this.http.post<Book>(`${environment.baseUrl}/books/create`, book);
   }
-  upDateBook(book: Book): Observable<Book> {
+  updateBook(book: Book): Observable<Book> {
     return this.http.patch<Book>(
-      `${environment.baseUrl}/book-list/${book.BookID}`,
+      `${environment.baseUrl}/books/${book.BookID}/update`,
       book
     );
   }
   deleteBook(id: number): Observable<Book> {
-    return this.http.delete<Book>(`${environment.baseUrl}/book-list/${id}`);
+    return this.http.delete<Book>(`${environment.baseUrl}/books/${id}/delete`);
   }
 }

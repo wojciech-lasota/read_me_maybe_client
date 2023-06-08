@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 import {
   Category,
@@ -14,10 +15,17 @@ export class CategoryComponent implements OnInit {
   categories!: Category[];
   sortDirectionAsc: boolean = true;
 
-  constructor(private readonly categoryService: CategoryService) {}
+  constructor(
+    private readonly categoryService: CategoryService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getCategories();
+    this.categoryService.categories$.subscribe((categories) => {
+      this.categories = categories;
+    });
   }
 
   getCategories(): void {
@@ -40,6 +48,9 @@ export class CategoryComponent implements OnInit {
       return this.sortDirectionAsc ? compareResult : -compareResult;
     });
   }
+  get isAddCategoryRoute() {
+    return this.router.url.includes('/category/add');
+  }
 
   toggleSortDirection(): void {
     this.sortDirectionAsc = !this.sortDirectionAsc;
@@ -47,5 +58,13 @@ export class CategoryComponent implements OnInit {
 
   getSortIcon(): string {
     return this.sortDirectionAsc ? '▲' : '▼';
+  }
+  onUpdate(categotyId: number): void {
+    console.log('categoryid', categotyId);
+    this.router.navigate(['/category/add', categotyId]);
+  }
+  onDelete(categotyId: number): void {
+    console.log('categoryid', categotyId);
+    this.categoryService.deleteCategory(categotyId).subscribe();
   }
 }
