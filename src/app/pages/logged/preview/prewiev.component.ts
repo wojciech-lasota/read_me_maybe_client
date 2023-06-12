@@ -6,14 +6,13 @@ import { Book, BookService } from 'src/app/shared/services/book.service';
 @Component({
   selector: 'app-prewiev',
   templateUrl: './prewiev.component.html',
-  styleUrls: ['./prewiev.component.scss'],
 })
 export class PreviewComponent implements OnInit {
   book!: Book;
 
   constructor(
     private readonly bookService: BookService,
-    private route: ActivatedRoute
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -22,7 +21,6 @@ export class PreviewComponent implements OnInit {
       .getBookDetails(id)
       .pipe(
         tap((book) => {
-          console.log('book', book);
           this.book = book;
         })
       )

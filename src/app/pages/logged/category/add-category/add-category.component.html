@@ -6,17 +6,14 @@
   </div>
 
   <div class="form-group">
-    <!-- ... -->
   </div>
 
 
 
-  <!-- Wyświetl przycisk "Add category", jeśli nie ma parametru 'id' -->
   <button *ngIf="!isUpdating()" type="submit" class="btn btn-primary" [disabled]="!categoryForm.valid">
     Add category
   </button>
 
-  <!-- Wyświetl przycisk "Update category", jeśli parametr 'id' istnieje -->
   <button *ngIf="isUpdating()" type="submit" class="btn btn-primary" [disabled]="!categoryForm.valid">
     Update category
   </button>

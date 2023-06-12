@@ -31,12 +31,10 @@
       Category is required.
     </div>
   </div>
-  <!-- Wyświetl przycisk "Add Book", jeśli nie ma parametru 'id' -->
   <button *ngIf="!isUpdating()" type="submit" class="btn btn-primary" [disabled]="!bookForm.valid">
     Add Book
   </button>
 
-  <!-- Wyświetl przycisk "Update Book", jeśli parametr 'id' istnieje -->
   <button *ngIf="isUpdating()" type="submit" class="btn btn-primary" [disabled]="!bookForm.valid">
     Update Book
   </button>

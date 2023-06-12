@@ -1,38 +1,26 @@
-.container {
-  h2 {
-    color: #6c757d;
-    transition: all 0.3s ease-in-out;
+.category-link {
+  font-size: 1.5em;
+  color: #007bff;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
 
-    &:hover {
-      color: #007bff;
-    }
-  }
+.category-link:hover {
+  color: green;
+  text-decoration: none;
+}
 
-  .table {
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
+.book-link {
+  font-size: 1.2em;
+  color: #6c757d;
+  transition: color 0.3s ease-in-out;
+}
 
-    th {
-      background-color: #6c757d;
-      color: #fff;
-      transition: all 0.3s ease-in-out;
+.book-link:hover {
+  color: green;
+  text-decoration: none;
+}
 
-      &:hover {
-        background-color: #007bff;
-      }
-    }
-
-    tr {
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        background-color: rgba(0, 123, 255, 0.1);
-      }
-    }
-
-    .fa-book {
-      color: #007bff;
-    }
-  }
+.no-books {
+  font-style: italic;
 }

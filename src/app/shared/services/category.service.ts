@@ -19,7 +19,6 @@ export class CategoryService {
 
   constructor(private http: HttpClient) {}
 
-  // Pobiera wszystkie kategorie
   getCategoryList() {
     return this.http.get<Category[]>(`${this.apiUrl}`);
   }
@@ -27,7 +26,6 @@ export class CategoryService {
     return this.http.get<Category[]>(`${this.apiUrl}/with-books`);
   }
 
-  // Tworzy nową kategorię
   createCategory(category: { CategoryName: string }) {
     return this.http.post<Category>(`${this.apiUrl}/create`, category).pipe(
       tap(() => {
@@ -38,12 +36,10 @@ export class CategoryService {
     );
   }
 
-  // Pobiera szczegóły kategorii o podanym ID
   getCategoryById(id: number) {
     return this.http.get<Category>(`${this.apiUrl}/${id}`);
   }
 
-  // Aktualizuje kategorię o podanym ID
   updateCategory(id: number, category: { CategoryName: string }) {
     return this.http
       .patch<Category>(`${this.apiUrl}/${id}/update`, category)
@@ -56,7 +52,6 @@ export class CategoryService {
       );
   }
 
-  // Usuwa kategorię o podanym ID
   deleteCategory(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}/delete`).pipe(
       tap(() => {

@@ -1,24 +1,21 @@
 <div class="container my-5">
-  <div *ngFor="let category of categories">
-    <h2 class="mb-3">{{ category.CategoryName }}</h2>
-    <table class="table table-striped">
-      <thead class="bg-primary text-white">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Book Title</th>
-          <th scope="col">Author</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let book of category.Books">
-          <th scope="row"><i class="fas fa-book"></i></th>
-          <td>{{ book.BookTitle }}</td>
-          <td>{{ book.Author }}</td>
-        </tr>
-        <tr *ngIf="!category.Books.length">
-          <td colspan="3" class="text-center">No books in this category</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <ol>
+    <li *ngFor="let category of categories; index as i" class="my-3">
+      <a (click)="onPreview(category.CategoryID)" class="category-link">
+        <i class="fas fa-folder"></i> {{ category.CategoryName }}
+
+      </a>
+      <ol class="pl-3">
+        <li *ngFor="let book of category.Books" class="my-2">
+          <a [routerLink]="['/preview', book.BookID]" class="book-link">
+            <i class="fas fa-book"></i> {{ book.BookTitle }} by
+            <span class="text-primary">{{ book.Author }}</span>
+          </a>
+        </li>
+        <li *ngIf="!category.Books.length" class="no-books text-muted">
+          No books in this category
+        </li>
+      </ol>
+    </li>
+  </ol>
 </div>

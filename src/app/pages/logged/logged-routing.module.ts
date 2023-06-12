@@ -5,6 +5,7 @@ import { BookListComponent } from './book-list/book-list.component';
 import { CategoryComponent } from './category/category.component';
 import { AddBookComponent } from './book-list/add-book/add-book.component';
 import { PreviewComponent } from './preview/prewiev.component';
+import { PreviewComponent as CategoryPreview } from './category/preview/preview.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
 import { HomeComponent } from './home/home.component';
 import { ListComponent } from './list/list.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: 'home',
+        path: 'home-logged',
         component: HomeComponent,
       },
       {
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListComponent,
+      },
+      {
+        path: 'categoryDetails/:id',
+        component: CategoryPreview,
       },
     ],
   },

@@ -1,13 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { BookUpdateService } from 'src/app/shared/services/book-update.service';
 import { Book, BookService } from 'src/app/shared/services/book.service';
 
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.scss'],
 })
 export class BookListComponent implements OnInit {
   books!: Book[];
@@ -35,7 +35,6 @@ export class BookListComponent implements OnInit {
       .getBooks()
       .pipe(
         tap((books) => {
-          console.log('books', books);
           this.books = books;
         })
       )
@@ -74,13 +73,21 @@ export class BookListComponent implements OnInit {
   }
 
   onDelete(bookId: number): void {
-    this.bookService.deleteBook(bookId).subscribe(() => {
-      this.getBooks();
-    });
+    this.bookService
+      .deleteBook(bookId)
+      .pipe(
+        tap(() => {}),
+        catchError((error: HttpErrorResponse) => {
+          alert(error.error.error);
+          throw error;
+        })
+      )
+      .subscribe(() => {
+        this.getBooks();
+      });
   }
 
   onPreview(bookId: number): void {
-    console.log('bookId', bookId);
     this.router.navigate(['/preview', bookId]);
   }
 }

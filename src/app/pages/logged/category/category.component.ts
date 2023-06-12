@@ -1,6 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import {
   Category,
   CategoryService,
@@ -33,7 +34,6 @@ export class CategoryComponent implements OnInit {
       .getCategoryList()
       .pipe(
         tap((categories) => {
-          console.log('categories', categories);
           this.categories = categories;
         })
       )
@@ -60,11 +60,18 @@ export class CategoryComponent implements OnInit {
     return this.sortDirectionAsc ? '▲' : '▼';
   }
   onUpdate(categotyId: number): void {
-    console.log('categoryid', categotyId);
     this.router.navigate(['/category/add', categotyId]);
   }
   onDelete(categotyId: number): void {
-    console.log('categoryid', categotyId);
-    this.categoryService.deleteCategory(categotyId).subscribe();
+    this.categoryService
+      .deleteCategory(categotyId)
+      .pipe(
+        tap(() => {}),
+        catchError((error: HttpErrorResponse) => {
+          alert(error.error.error);
+          throw error;
+        })
+      )
+      .subscribe();
   }
 }

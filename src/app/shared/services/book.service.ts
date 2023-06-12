@@ -30,11 +30,7 @@ export class BookService {
     return this.http.get<Book>(`${environment.baseUrl}/books/${id}/details`);
   }
 
-  // getBasicBooks(): Observable<Book[]> {
-  //   return this.http.get<Book[]>(`${environment.baseUrl}/book-list/basic`);
-  // }
   addBook(book: Book): Observable<Book> {
-    console.log('book', book);
     return this.http.post<Book>(`${environment.baseUrl}/books/create`, book);
   }
   updateBook(book: Book): Observable<Book> {

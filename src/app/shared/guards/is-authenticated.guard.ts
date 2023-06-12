@@ -30,7 +30,7 @@ export class IsAuthenticatedGuard implements CanActivate {
     if (isToken) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
       return false;
     }
   }

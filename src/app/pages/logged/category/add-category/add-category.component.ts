@@ -1,13 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { pipe, tap } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { CategoryService } from 'src/app/shared/services/category.service';
 
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
-  styleUrls: ['./add-category.component.scss'],
 })
 export class AddCategoryComponent implements OnInit {
   categoryForm!: FormGroup;
@@ -15,7 +15,8 @@ export class AddCategoryComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly categoryService: CategoryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +30,6 @@ export class AddCategoryComponent implements OnInit {
           .getCategoryById(+categoryId)
           .pipe(
             tap((category) => {
-              console.log('category', category);
               this.categoryForm.patchValue({
                 categoryName: category.CategoryName,
               });
@@ -37,9 +37,7 @@ export class AddCategoryComponent implements OnInit {
           )
           .subscribe();
       } else {
-        this.categoryService.getCategoryList().subscribe((categories) => {
-          console.log('categories', categories);
-        });
+        this.categoryService.getCategoryList().subscribe((categories) => {});
       }
     });
   }
@@ -48,7 +46,6 @@ export class AddCategoryComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('categoryForm', this.categoryForm.value);
     const categoryName: string = this.categoryForm.value.categoryName;
     const category = { CategoryName: categoryName };
 
@@ -57,14 +54,27 @@ export class AddCategoryComponent implements OnInit {
       // aktualizacja kategorii, jeśli categoryId istnieje
       this.categoryService
         .updateCategory(+categoryId, category)
-        .subscribe(() => {
-          console.log('Category updated successfully!');
-        });
+        .pipe(
+          tap(() => {}),
+          catchError((error: HttpErrorResponse) => {
+            alert(error.error.error);
+            throw error;
+          })
+        )
+        .subscribe(() => {});
     } else {
       // tworzenie nowej kategorii, jeśli categoryId nie istnieje
-      this.categoryService.createCategory(category).subscribe(() => {
-        console.log('Category created successfully!');
-      });
+      this.categoryService
+        .createCategory(category)
+        .pipe(
+          tap(() => {}),
+          catchError((error: HttpErrorResponse) => {
+            alert(error.error.error);
+            throw error;
+          })
+        )
+        .subscribe(() => {});
     }
+    this.router.navigate(['/category/']);
   }
 }

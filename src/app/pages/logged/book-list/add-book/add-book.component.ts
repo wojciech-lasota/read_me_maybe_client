@@ -1,7 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, switchMap, tap } from 'rxjs';
+import { Observable, catchError, of, switchMap, tap } from 'rxjs';
 import { BookUpdateService } from 'src/app/shared/services/book-update.service';
 import { BookService } from 'src/app/shared/services/book.service';
 import {
@@ -12,7 +13,6 @@ import {
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.scss'],
 })
 export class AddBookComponent implements OnInit {
   bookForm!: FormGroup;
@@ -38,7 +38,6 @@ export class AddBookComponent implements OnInit {
       const bookId = params.get('id');
       if (bookId) {
         this.bookService.getBook(+bookId).subscribe((book) => {
-          console.log('book', book);
           this.bookForm.patchValue({
             BookTitle: book.BookTitle,
             Author: book.Author,
@@ -52,10 +51,6 @@ export class AddBookComponent implements OnInit {
     this.categoryService.getCategoryList().subscribe((categories) => {
       this.categories = categories;
     });
-    // this.categoryService
-    //   .getCategoryWithBooks()
-    //   .pipe(tap((category) => console.log('category', category)))
-    //   .subscribe();
   }
   isUpdating(): boolean {
     return this.route.snapshot.paramMap.has('id');
@@ -66,15 +61,18 @@ export class AddBookComponent implements OnInit {
       let bookObs$: Observable<any>;
       if (bookId) {
         const bookToUpdate = { ...this.bookForm.value, BookID: +bookId };
-        console.log('bookToUpdate', bookToUpdate);
         bookObs$ = this.bookService.updateBook(bookToUpdate);
       } else {
-        console.log('this.bookForm.value', this.bookForm.value);
         bookObs$ = this.bookService.addBook(this.bookForm.value);
       }
 
       bookObs$
         .pipe(
+          tap(() => {}),
+          catchError((error: HttpErrorResponse) => {
+            alert(error.error.error);
+            throw error;
+          }),
           switchMap(() => {
             this.bookUpdateService.triggerRefresh();
             return of(null);

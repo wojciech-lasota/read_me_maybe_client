@@ -3,10 +3,9 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 function usernameValidator(
@@ -31,7 +30,6 @@ function passwordValidator(
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   form!: FormGroup;
@@ -79,12 +77,10 @@ export class RegisterComponent implements OnInit {
       .pipe(
         tap((response) => {
           this.success = true;
-          console.log('response', response);
           this.loading = false;
         }),
         catchError((error) => {
           this.error = true;
-          console.error('error', error);
           this.loading = false;
           return error;
         })

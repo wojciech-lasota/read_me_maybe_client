@@ -13,7 +13,6 @@ import { TokenService } from 'src/app/shared/services/token.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
@@ -56,13 +55,11 @@ export class LoginComponent implements OnInit {
       .login(username, password)
       .pipe(
         tap((response) => {
-          console.log('response', response);
           this.tokenService.setToken(response.accessToken);
           this.router.navigate(['book-list']);
         }),
         catchError((error) => {
           this.error = 'Login failed. Please check your credentials.';
-          console.error('error', error);
           this.loading = false;
 
           return error;
