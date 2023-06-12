@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         catchError((error) => {
           this.error = 'Login failed. Please check your credentials.';
           this.loading = false;
-
+          alert(error.error.error);
           return error;
         })
       )

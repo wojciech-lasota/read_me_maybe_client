@@ -6,22 +6,37 @@
         <div class="mb-3">
           <label class="form-label">Username</label>
           <input type="text" formControlName="username" class="form-control" />
-          <div *ngIf="form.controls['username'].invalid && form.controls['username'].touched"
-            class="alert alert-danger">
+          <div
+            *ngIf="
+              form.controls['username'].invalid &&
+              form.controls['username'].touched
+            "
+            class="alert alert-danger"
+          >
             <div *ngIf="form.controls['username'].hasError('required')">
               Username is required.
             </div>
 
             <div *ngIf="form.controls['username'].hasError('invalidUsername')">
-              Invalid username. Minimum 6 characters, no special characters, and cannot start with a number.
+              Invalid username. Minimum 6 characters, no special characters, and
+              cannot start with a number.
             </div>
           </div>
         </div>
         <div class="mb-3">
           <label class="form-label">Password</label>
-          <input type="password" formControlName="password" class="form-control" />
-          <div *ngIf="form.controls['password'].invalid && (form.controls['password'].touched || submitted)"
-            class="alert alert-danger">
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+          />
+          <div
+            *ngIf="
+              form.controls['password'].invalid &&
+              (form.controls['password'].touched || submitted)
+            "
+            class="alert alert-danger"
+          >
             <div *ngIf="form.controls['password'].hasError('required')">
               Password is required.
             </div>
@@ -29,16 +44,22 @@
               Invalid password. Minimum 6 characters.
             </div>
             <div *ngIf="form.controls['password'].hasError('invalidPassword')">
-              Invalid password. Minimum 6 characters with at least 3 numbers.
+              Invalid password. Minimum 6 characters with at least 1 number.
             </div>
           </div>
         </div>
         <div>
           <button [disabled]="loading" class="btn btn-primary">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm me-1"
+            ></span>
             <span *ngIf="loading; else loginText">Logging in</span>
             <ng-template #loginText>Login</ng-template>
           </button>
+          <div class="alert alert-danger" *ngIf="error">
+            {{ error }}
+          </div>
           <a routerLink="../register" class="btn btn-link">Register</a>
         </div>
       </form>
@@ -49,9 +70,17 @@
 <footer class="bg-primary text-light text-center py-3 fixed-bottom">
   <p>&copy; 2023 Read Me, Maybe. All rights reserved.</p>
   <div class="d-flex justify-content-center">
-    <a href="https://github.com/wojciech-lasota" target="_blank" class="btn btn-dark btn-lg mr-2"><i
-        class="fab fa-github"></i> Wojciech Lasota</a>
-    <a href="https://github.com/janikRafal" target="_blank" class="btn btn-dark btn-lg ml-2"><i
-        class="fab fa-github"></i> Rafał Janik</a>
+    <a
+      href="https://github.com/wojciech-lasota"
+      target="_blank"
+      class="btn btn-dark btn-lg mr-2"
+      ><i class="fab fa-github"></i> Wojciech Lasota</a
+    >
+    <a
+      href="https://github.com/janikRafal"
+      target="_blank"
+      class="btn btn-dark btn-lg ml-2"
+      ><i class="fab fa-github"></i> Rafał Janik</a
+    >
   </div>
 </footer>

@@ -9,8 +9,12 @@
     <tr>
       <th>
         Category Name
-        <button class="btn btn-link btn-sm" (click)="toggleSortDirection(); sortCategories('CategoryName')">Sort {{
-          getSortIcon() }}</button>
+        <button
+          class="btn btn-link btn-sm"
+          (click)="toggleSortDirection(); sortCategories('CategoryName')"
+        >
+          Sort {{ getSortIcon() }}
+        </button>
       </th>
       <th>Actions</th>
     </tr>
@@ -19,13 +23,24 @@
     <tr *ngFor="let category of categories">
       <td class="m-2">{{ category.CategoryName }}</td>
       <td>
-        <button class="btn btn-warning btn-sm m-1" (click)="onUpdate(category.CategoryID)">
+        <button
+          class="btn btn-warning btn-sm m-1"
+          (click)="onUpdate(category.CategoryID)"
+        >
           <i class="fas fa-edit"></i>
         </button>
-        <button class="btn btn-danger btn-sm m-1" (click)="onDelete(category.CategoryID)">
+        <button
+          class="btn btn-danger btn-sm m-1"
+          (click)="onDelete(category.CategoryID)"
+        >
           <i class="fas fa-trash"></i>
         </button>
-
+        <button
+          class="btn btn-secondary btn-sm"
+          (click)="onPreview(category.CategoryID)"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
       </td>
     </tr>
   </tbody>
@@ -34,9 +49,12 @@
   <button routerLink="/category/add" class="btn btn-primary">
     <i class="fas fa-plus-circle"></i> Add Category
   </button>
-  <button *ngIf="isAddCategoryRoute" routerLink="/category" class="btn btn-primary">
+  <button
+    *ngIf="isAddCategoryRoute"
+    routerLink="/category"
+    class="btn btn-primary"
+  >
     <i class="fa-solid fa-circle-xmark"></i> Close
   </button>
-
 </div>
 <router-outlet></router-outlet>

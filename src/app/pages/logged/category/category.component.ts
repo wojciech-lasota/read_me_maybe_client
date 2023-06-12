@@ -74,4 +74,8 @@ export class CategoryComponent implements OnInit {
       )
       .subscribe();
   }
+
+  onPreview(categoryId: number): void {
+    this.router.navigate(['/categoryDetails', categoryId]);
+  }
 }
